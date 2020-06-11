@@ -1,0 +1,292 @@
+{% extends "layout.html" %}
+{% block content %}
+
+   <div class="row">
+        {% if key != '' %}
+            <div class="row detial">
+                <h3>Related items for
+                    <spam class="fuck">{{ key }}</spam>
+                </h3>
+            </div>
+        {% else %}
+            <div class="row" style="margin-top: 20px">
+
+            </div>
+        {% endif %}
+    </div>
+
+
+
+    <div class="row">
+        <nav aria-label="Page navigation example" class="m-auto">
+            <ul class="pagination">
+                {% if paginate.has_prev %}
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="/info/?group={{ group }}&key={{ key }}&page={{ paginate.prev_num }}&avg_rate={{ avg_rate }}">Previous</a>
+                    </li>
+                {% endif %}
+
+                <!-- all page numbers -->
+                {% for page_num in paginate.iter_pages() %}
+                    {% if page_num %}
+                        {% if page_num != paginate.page %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                   href="/info/?group={{ group }}&key={{ key }}&page={{ page_num }}&avg_rate={{ avg_rate }}">{{ page_num }}</a>
+                            </li>
+                        {% else %}
+                            <li class="active page-item">
+                                <a class="page-link" href="#">{{ page_num }}</a>
+                            </li>
+                        {% endif %}
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="#">...</a>
+                        </li>
+                    {% endif %}
+
+                {% endfor %}
+
+                <!-- next page -->
+                {% if paginate.has_next %}
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="/info/?group={{ group }}&key={{ key }}&page={{ paginate.next_num }}&avg_rate={{ avg_rate }}">Next</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="panel panel-primary" style="width: 100%">
+
+            {% if products %}
+
+
+                <table class="table table-hover" style="margin: auto; width: 95%">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col" style="width: 10.00%">Id</th>
+                        <th scope="col" style="width: 60.00%">Title</th>
+                        <th scope="col" style="width: 10.00%">Group</th>
+                        <th scope="col" style="width: 10.00%">Sales_Rank</th>
+                        <th scope="col" style="width: 10.00%">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for product in products %}
+                        <tr>
+                            <th class="align-middle" scope="row">{{ product.Id }}</th>
+                            <td class="align-middle">{{ product.title }}</td>
+                            <td class="align-middle">{{ product.group }}</td>
+                            <td class="align-middle">{{ product.salesrank }}</td>
+                            <td class="align-middle">
+                                <div class="box-btn">
+                                    <form method="GET" action="/detail">
+                                        <input type="hidden" name="product_id" value="{{ product.Id }}"/>
+                                        <button type="submit" class="btn btn-primary" data-toggle="button"
+                                                aria-pressed="false">More
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+
+            {% else %}
+                <h1>This product is not in database!</h1>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px">
+        <nav aria-label="Page navigation example" class="m-auto" >
+            <ul class="pagination">
+                {% if paginate.has_prev %}
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="/info/?group={{ group }}&key={{ key }}&page={{ paginate.prev_num }}&avg_rate={{ avg_rate }}">Previous</a>
+                    </li>
+                {% endif %}
+
+                <!-- all page numbers -->
+                {% for page_num in paginate.iter_pages() %}
+                    {% if page_num %}
+                        {% if page_num != paginate.page %}
+                            <li class="page-item">
+                                <a class="page-link"
+                                   href="/info/?group={{ group }}&key={{ key }}&page={{ page_num }}&avg_rate={{ avg_rate }}">{{ page_num }}</a>
+                            </li>
+                        {% else %}
+                            <li class="active page-item">
+                                <a class="page-link" href="#">{{ page_num }}</a>
+                            </li>
+                        {% endif %}
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="#">...</a>
+                        </li>
+                    {% endif %}
+
+                {% endfor %}
+
+                <!-- next page -->
+                {% if paginate.has_next %}
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="/info/?group={{ group }}&key={{ key }}&page={{ paginate.next_num }}&avg_rate={{ avg_rate }}">Next</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+{#    <div class="container">#}
+{#        {%if key != '' %}#}
+{#            <div class="row detial">#}
+{#                <h4>Related items for#}
+{#                    <spam class = "fuck">{{ key }}</spam>#}
+{#                </h4>#}
+{#                <br>#}
+{#            </div>#}
+{#        {% else %}#}
+{#            <div class="row detial">#}
+{#                <h4></h4>#}
+{#                <br>#}
+{#            </div>#}
+{#        {% endif %}#}
+{##}
+{##}
+{#        <div class="row">#}
+{#            <nav aria-label="Page navigation example" class="m-auto">#}
+{#                <ul class="pagination">#}
+{#                    {% if paginate.has_prev %}#}
+{#                        <li class="page-item">#}
+{#                            <a class="page-link"#}
+{#                               href="/info/?group={{ group }}&key={{ key }}&page={{ paginate.prev_num }}&avg_rate={{ avg_rate }}">Previous</a>#}
+{#                        </li>#}
+{#                    {% endif %}#}
+{##}
+{#                    <!-- all page numbers -->#}
+{#                    {% for page_num in paginate.iter_pages() %}#}
+{#                        {% if page_num %}#}
+{#                            {% if page_num != paginate.page %}#}
+{#                                <li class="page-item">#}
+{#                                    <a class="page-link"#}
+{#                                       href="/info/?group={{ group }}&key={{ key }}&page={{ page_num }}&avg_rate={{ avg_rate }}">{{ page_num }}</a>#}
+{#                                </li>#}
+{#                            {% else %}#}
+{#                                <li class="active page-item">#}
+{#                                    <a class="page-link" href="#">{{ page_num }}</a>#}
+{#                                </li>#}
+{#                            {% endif %}#}
+{#                        {% else %}#}
+{#                            <li class="page-item">#}
+{#                                <a class="page-link" href="#">...</a>#}
+{#                            </li>#}
+{#                        {% endif %}#}
+{##}
+{#                    {% endfor %}#}
+{##}
+{#                    <!-- next page -->#}
+{#                    {% if paginate.has_next %}#}
+{#                        <li class="page-item">#}
+{#                            <a class="page-link"#}
+{#                               href="/info/?group={{ group }}&key={{ key }}&page={{ paginate.next_num }}&avg_rate={{ avg_rate }}">Next</a>#}
+{#                        </li>#}
+{#                    {% endif %}#}
+{#                </ul>#}
+{#            </nav>#}
+{#        </div>#}
+{#        <div class="row">#}
+{#            <div class="panel panel-primary" style="width: 100%">#}
+{##}
+{#                {% if products %}#}
+{##}
+{##}
+{#                    <table class="table">#}
+{#                        <thead class="thead-dark">#}
+{#                        <tr>#}
+{#                            <th scope="col" style="width: 10.00%">Id</th>#}
+{#                            <th scope="col" style="width: 60.00%">Title</th>#}
+{#                            <th scope="col" style="width: 10.00%">Group</th>#}
+{#                            <th scope="col" style="width: 10.00%">Sales_Rank</th>#}
+{#                            <th scope="col" style="width: 10.00%">Actions</th>#}
+{#                        </tr>#}
+{#                        </thead>#}
+{#                        <tbody>#}
+{#                        {% for product in products %}#}
+{#                            <tr>#}
+{#                                <th class="align-middle" scope="row">{{ product.Id }}</th>#}
+{#                                <td class="align-middle">{{ product.title }}</td>#}
+{#                                <td class="align-middle">{{ product.group }}</td>#}
+{#                                <td class="align-middle">{{ product.salesrank }}</td>#}
+{#                                <td class="align-middle">#}
+{#                                    <div class="box-btn">#}
+{#                                        <form method="GET" action="/detail">#}
+{#                                            <input type="hidden" name="product_id" value="{{ product.Id }}"/>#}
+{#                                            <button type="submit" class="btn btn-primary" data-toggle="button"#}
+{#                                                    aria-pressed="false">More#}
+{#                                            </button>#}
+{#                                        </form>#}
+{#                                    </div>#}
+{#                                </td>#}
+{#                            </tr>#}
+{#                        {% endfor %}#}
+{#                        </tbody>#}
+{#                    </table>#}
+{##}
+{##}
+{#                {% else %}#}
+{#                    <h1>This product is not in database!</h1>#}
+{#                {% endif %}#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="row">#}
+{#            <nav aria-label="Page navigation example" class="m-auto">#}
+{#                <ul class="pagination">#}
+{#                    {% if paginate.has_prev %}#}
+{#                        <li class="page-item">#}
+{#                            <a class="page-link"#}
+{#                               href="/info/?group={{ group }}&key={{ key }}&page={{ paginate.prev_num }}&avg_rate={{ avg_rate }}">Previous</a>#}
+{#                        </li>#}
+{#                    {% endif %}#}
+{##}
+{#                    <!-- all page numbers -->#}
+{#                    {% for page_num in paginate.iter_pages() %}#}
+{#                        {% if page_num %}#}
+{#                            {% if page_num != paginate.page %}#}
+{#                                <li class="page-item">#}
+{#                                    <a class="page-link"#}
+{#                                       href="/info/?group={{ group }}&key={{ key }}&page={{ page_num }}&avg_rate={{ avg_rate }}">{{ page_num }}</a>#}
+{#                                </li>#}
+{#                            {% else %}#}
+{#                                <li class="active page-item">#}
+{#                                    <a class="page-link" href="#">{{ page_num }}</a>#}
+{#                                </li>#}
+{#                            {% endif %}#}
+{#                        {% else %}#}
+{#                            <li class="page-item">#}
+{#                                <a class="page-link" href="#">...</a>#}
+{#                            </li>#}
+{#                        {% endif %}#}
+{##}
+{#                    {% endfor %}#}
+{##}
+{#                    <!-- next page -->#}
+{#                    {% if paginate.has_next %}#}
+{#                        <li class="page-item">#}
+{#                            <a class="page-link"#}
+{#                               href="/info/?group={{ group }}&key={{ key }}&page={{ paginate.next_num }}&avg_rate={{ avg_rate }}">Next</a>#}
+{#                        </li>#}
+{#                    {% endif %}#}
+{#                </ul>#}
+{#            </nav>#}
+{#        </div>#}
+{#    </div>#}
+
+
+
+{% endblock %}

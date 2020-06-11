@@ -1,0 +1,131 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if product %}
+    <div class="row" style="width: 98%">
+        <h2 style="margin-left: 30px; padding-top: 20px">Product:{{ product.title }}</h2>
+        <hr>
+    </div>
+    <div class="row" style="width: 98%; margin: auto; padding-top: 30px">
+        <div class="col-sm-6">
+            <div class="card" style="margin: auto">
+                <div class="card-header">
+                    Categories
+                </div>
+                <div class="card-body">
+                    {% for cat in product.categories %}
+                        <p><h5>{{ cat }}</h5></p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card" style="margin: auto">
+                <div class="card-header">
+                    Detail
+                </div>
+                <div class="card-body">
+                    <p><h5>Sales Rank: {{ product.salesrank }}</h5></p>
+                    {% for review in product.reviews %}
+                        <p><h5>Total comments: {{ review.total }}</h5></p>
+                        <p><h5>Total download: {{ review.downloaded }}</h5></p>
+                        <p><h5>Average Rating: {{ review.avg_rating }}</h5></p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card" style="margin: auto">
+                <div class="card-header">
+                    Similar Products
+                </div>
+                <div class="card-body">
+                    <p><h5>Sales Rank: {{ product.salesrank }}</h5></p>
+                    {% for review in product.reviews %}
+                        <p><h5>Total comments: {{ review.total }}</h5></p>
+                        <p><h5>Total download: {{ review.downloaded }}</h5></p>
+                        <p><h5>Average Rating: {{ review.avg_rating }}</h5></p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {#        <div class="panel panel-warning">#}
+    {#            <div class="panel-heading"><h4>Categories</h4></div>#}
+    {#            <div class="panel-body">#}
+    {#                {% for cat in product.categories %}#}
+    {#                    <h5>{{ cat }}</h5>#}
+    {#                {% endfor %}#}
+    {#            </div>#}
+    {#        </div>#}
+    {#        <br>#}
+    {#        <hr>#}
+    {#        <br>#}
+    {#        <div class="panel panel-default">#}
+    {#            <div class="panel-heading"><h4>Detail</h4></div>#}
+    {#            <div class="panel-body">#}
+    {#                <p><h5>Sales Rank: {{ product.salesrank }}</h5></p>#}
+    {#                {% for review in product.reviews %}#}
+    {#                    <p><h5>Total comments: {{ review.total }}</h5></p>#}
+    {#                    <p><h5>Total download: {{ review.downloaded }}</h5></p>#}
+    {#                    <p><h5>Average Rating: {{ review.avg_rating }}</h5></p>#}
+    {#                {% endfor %}#}
+    {#            </div>#}
+    {#        </div>#}
+    {#        <hr>#}
+    {#        <br>#}
+
+    <div class="row" style="width: 98%; margin: auto; padding-top: 30px">
+    <div class="col-sm-12">
+        <div class="card" style="margin: auto">
+            <div class="card-header">
+                Comments
+            </div>
+            <div class="card-body">
+                <table class="table table-hover">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col"><h5>Customer_Id</h5></th>
+                        <th scope="col"><h5>rating</h5></th>
+                        <th scope="col"><h5>votes</h5></th>
+                        <th scope="col"><h5>helpful</h5></th>
+                        <th scope="col"><h5>created time</h5></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in product.items %}
+                        <tr>
+                            <td><h5>{{ item.cutomer_Id }}</h5></td>
+                            <td><h5>{{ item.rating }}</h5></td>
+                            <td><h5>{{ item.votes }}</h5></td>
+                            <td><h5>{{ item.helpful }}</h5></td>
+                            <td><h5>{{ item.create_time }}</h5></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<div class="col-sm-12" style="width: 98%; margin: auto; padding-top: 30px; padding-bottom: 40px">
+        {% if similar_products %}
+            <h4>Similar Products</h4>
+            <br>
+            <div class="list-group" >
+                {% for s_prodcut in similar_products %}
+                    <button type="button" class="list-group-item list-group-item-action">
+                        <h5>{{ s_prodcut.title }}</h5>
+                    </button>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+    {% else %}
+        <h1>No this Id product!</h1>
+    {% endif %}
+</div>
+
+
+{% endblock %}

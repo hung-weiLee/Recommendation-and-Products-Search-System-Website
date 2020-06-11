@@ -1,0 +1,121 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="row" style="margin-top: 20px">
+        {#        <div ><h3>Loading...</h3></div>#}
+{#        <div class="progress" id="loading-bar" style="margin: auto; width: 70%; position:absolute;#}
+{#        left:0; top: 0; bottom: 0; right: 0">#}
+{#            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75"#}
+{#                 aria-valuemin="0" aria-valuemax="100" id="loading" style="width: 75%"></div>#}
+{#        </div>#}
+
+
+        <div class="card" id="card2" style="width: 45%; margin: auto; visibility: hidden">
+            <div class="card-header">
+                Categories
+            </div>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <div id="bar2" style="width:100%; height:600px;">
+                    </div>
+                </blockquote>
+            </div>
+        </div>
+        <script>
+            var chart2 = echarts.init(document.getElementById('bar2'), 'gray', {renderer: 'canvas'});
+            $.ajax({
+                type: "GET",
+                url: "http://127.0.0.1:5000/pieChart",
+                dataType: 'json',
+                data: {},
+                success: function (result) {
+                    {#$("#loading-bar").empty().attr("style", {"blackground-color": ""});#}
+                    $("#card2").css("visibility", "visible");
+                    chart2.setOption(result);
+                }
+            });
+        </script>
+
+        <div class="card" id="card1" style="width: 45%; margin: auto; visibility: hidden">
+            <div class="card-header">
+                Classification
+            </div>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <div id="bar1" style="width:100%; height:600px;">
+                    </div>
+                </blockquote>
+            </div>
+        </div>
+        <script>
+            var chart1 = echarts.init(document.getElementById('bar1'), 'gray', {renderer: 'canvas'});
+            $.ajax({
+                type: "GET",
+                url: "http://127.0.0.1:5000/pieChart2",
+                dataType: 'json',
+                data: {},
+                success: function (result) {
+                    $("#card1").css("visibility", "visible");
+                    chart1.setOption(result);
+                }
+            });
+        </script>
+
+
+    </div>
+
+    <div class="row" style="margin-top: 50px; margin-bottom: 20px">
+
+        <div class="card" id="card3" style="width: 45%; margin: auto; visibility: hidden">
+            <div class="card-header">
+                The number of products per rating grade
+            </div>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <div id="bar3" style="width:100%; height:600px;">
+                    </div>
+                </blockquote>
+            </div>
+        </div>
+        <script>
+            var chart3 = echarts.init(document.getElementById('bar3'), 'gray', {renderer: 'canvas'});
+            $.ajax({
+                type: "GET",
+                url: "http://127.0.0.1:5000/barChart1",
+                dataType: 'json',
+                data: {},
+                success: function (result) {
+                    $("#card3").css("visibility", "visible");
+                    chart3.setOption(result);
+                }
+            });
+        </script>
+
+
+        <div class="card" id="card4" style="width: 45%; margin: auto; visibility: hidden">
+            <div class="card-header">
+                The number of reviews per year
+            </div>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <div id="bar4" style="width:100%; height:600px;">
+                    </div>
+                </blockquote>
+            </div>
+        </div>
+        <script>
+            var chart4 = echarts.init(document.getElementById('bar4'), 'gray', {renderer: 'canvas'});
+            $.ajax({
+                type: "GET",
+                url: "http://127.0.0.1:5000/lineChart",
+                dataType: 'json',
+                data: {},
+                success: function (result) {
+                    $("#card4").css("visibility", "visible");
+                    chart4.setOption(result);
+                }
+            });
+        </script>
+    </div>
+
+
+{% endblock %}

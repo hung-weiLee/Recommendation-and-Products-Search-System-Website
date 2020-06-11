@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../static/css/bootstrap-grid.css" rel="stylesheet"/>
+        <link href="../static/css/index.css" rel="stylesheet"/>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/jQuery.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+    <title></title>
+</head>
+<body>
+<div class="container-fluid" style="width:100%; padding-right: 0; padding-left: 0; margin-left: 0; margin-right: 0">
+    <nav class="navbar navbar-dark navbar-expand-lg" style="background-color: #4e73df">
+        <a class="navbar-brand" href="/search" style="width: 120px; margin-right: 0">
+            <img  title="Home" src="../static/img/1.png" style="width: 100%; height: 100%" alt="">
+        </a>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+
+            </ul>
+            <form class="form-inline my-2 my-lg-0" name="search_form" action="/info/" method="get">
+                <div class="form-row">
+                    <label class="label-text" style="color: white">Product Name</label>
+                    <input type="text" class="form-control mr-sm-2" placeholder="Enter product name" name="key">
+                    <label  class="label-text" style="color: white">Average_Rate</label>
+                    <select name="avg_rate" class="form-control mr-sm-2">
+                        <option selected value="1" name="avg_rate">>= 1</option>
+                        <option value="2" name="avg_rate">>= 2</option>
+                        <option value="3" name="avg_rate">>= 3</option>
+                        <option value="4" name="avg_rate">>= 4</option>
+                    </select>
+                    <input class="form-control " type="hidden" name="page" value="1">
+                    <label  class="label-text" style="color: white">Groups</label>
+                    <select name="group" class="form-control mr-sm-2">
+                        <option selected value="All" name="group">All</option>
+                        <option value="Book" name="group">Book</option>
+                        <option value="Music" name="group">Music</option>
+                        <option value="DVD" name="group">DVD</option>
+                        <option value="Video" name="group">Video</option>
+                        <option value="Toy" name="group">Toy</option>
+                        <option value="Video Games" name="group">Video Games</option>
+                        <option value="Software" name="group">Software</option>
+                        <option value="CE" name="group">CE</option>
+                        <option value="Sports" name="group">Sports</option>
+                    </select>
+
+                    <button class="btn my-2 my-sm-0 search-button btn-sm" type="submit" value="Submit" style="background-color: #1cc88a" >Search</button>
+                </div>
+
+            </form>
+        </div>
+    </nav>
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+</html>

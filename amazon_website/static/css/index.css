@@ -1,0 +1,22 @@
+body{
+    font-family:'Arial', sans-serif;
+}
+
+.label-text {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.20em;
+    margin-right: 5px;
+    margin-left: 3px;
+}
+.search-button {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.20em;
+    color: white;
+}
+.detial{
+    margin-top: 10px;
+    margin-left: 40px;
+}
+.fuck{
+    color: red;
+}
